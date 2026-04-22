@@ -1,0 +1,7 @@
+{
+  "name": "CADWEB",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
