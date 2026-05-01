@@ -1,0 +1,61 @@
+.contacto-section {
+  padding: 80px 20px;
+  background-color: #f4f5f8;
+}
+
+.section-header {
+  margin-bottom: 50px;
+
+  .section-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--ion-color-dark);
+    margin-bottom: 10px;
+  }
+
+  .title-underline {
+    width: 60px;
+    height: 4px;
+    background-color: var(--ion-color-primary);
+    margin: 0 auto 20px;
+  }
+
+  .section-subtitle {
+    color: var(--ion-color-medium);
+    font-size: 1.1rem;
+  }
+}
+
+.contact-form-container {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+}
+
+.custom-input {
+  --padding-start: 0;
+  margin-bottom: 15px;
+  --highlight-color-focused: var(--ion-color-primary);
+}
+
+.upload-area {
+  border: 2px dashed #dcdfe6;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  margin: 20px 0;
+  color: var(--ion-color-medium);
+
+  ion-icon {
+    font-size: 40px;
+    color: var(--ion-color-primary);
+  }
+}
+
+.submit-button {
+  margin-top: 20px;
+  --border-radius: 8px;
+  height: 50px;
+  font-weight: 600;
+}

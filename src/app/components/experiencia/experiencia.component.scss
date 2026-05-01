@@ -1,0 +1,113 @@
+.experiencia-section {
+  padding: 80px 10px;
+  background-color: #ffffff; // Fondo blanco para que las cajas tengan sombra suave
+
+  .section-header {
+    margin-bottom: 50px;
+    
+    .section-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--ion-color-dark);
+      margin-bottom: 10px;
+    }
+
+    .title-underline {
+      width: 60px;
+      height: 4px;
+      background: var(--ion-color-secondary); 
+      margin: 0 auto 20px;
+      border-radius: 2px;
+    }
+
+    .section-subtitle {
+      max-width: 800px;
+      margin: 0 auto;
+      color: #555;
+      font-size: 1.1rem;
+    }
+  }
+
+  .exp-box {
+    background: #f9f9f9;
+    padding: 30px;
+    border-radius: 12px;
+    height: 100%;
+    border-left: 5px solid var(--ion-color-primary);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+    margin-bottom: 20px;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+
+    ion-badge {
+      padding: 6px 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 15px;
+      border-radius: 4px;
+    }
+
+    h4 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--ion-color-dark);
+      margin: 10px 0 15px 0;
+    }
+
+    p {
+      color: #444;
+      line-height: 1.6;
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    // Estilo especial para la caja de Desarrollo
+    &.highlight {
+      background: linear-gradient(135deg, #f0f7ff 0%, #ffffff 100%);
+      border-left: 5px solid var(--ion-color-tertiary);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+      ion-icon {
+        color: var(--ion-color-tertiary);
+        margin-bottom: 15px;
+      }
+    }
+
+    // Estilo especial para el Diferencial Final
+    &.final-box {
+      background: var(--ion-color-dark);
+      border-left: 5px solid var(--ion-color-warning);
+      color: white;
+
+      h4, p {
+        color: white;
+      }
+
+      ion-icon {
+        color: var(--ion-color-warning);
+        margin-bottom: 10px;
+      }
+    }
+  }
+}
+
+// Media Queries para responsividad
+@media (max-width: 768px) {
+  .experiencia-section {
+    padding: 50px 15px;
+
+    .section-title {
+      font-size: 1.8rem;
+    }
+
+    .exp-box {
+      padding: 20px;
+    }
+  }
+}

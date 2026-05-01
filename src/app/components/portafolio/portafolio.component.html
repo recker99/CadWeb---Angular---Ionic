@@ -1,0 +1,44 @@
+<section class="portafolio-section" id="portafolio">
+  <div class="section-header ion-text-center">
+    <h2 class="section-title">Proyectos Destacados</h2>
+    <div class="title-underline"></div>
+    <p class="section-subtitle">Una muestra de precisión y detalle en dibujo técnico.</p>
+  </div>
+
+  <div class="filter-container ion-padding-horizontal">
+    <ion-segment (ionChange)="segmentChanged($event)" value="todos" mode="md">
+      <ion-segment-button value="todos">
+        <ion-label>Todos</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="arquitectura">
+        <ion-label>Arquitectura</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="ingenieria">
+        <ion-label>Ingeniería</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="terreno">
+        <ion-label>Terreno</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <ion-grid>
+    <ion-row>
+      <ng-container *ngFor="let p of proyectosDestacados">
+        <ion-col size="12" size-md="6" size-lg="4" 
+                *ngIf="categoriaSeleccionada === 'todos' || p.categoria === categoriaSeleccionada">
+          <div class="portfolio-item">
+              <img [src]="p.miniaturaUrl" [alt]="p.titulo">
+              </div>
+        </ion-col>
+      </ng-container>
+    </ion-row>
+  </ion-grid>
+</section>
+
+<div class="ion-text-center ion-padding-top">
+  <ion-button routerLink="/proyectos" fill="outline" color="primary">
+    Ver Galería Completa
+    <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+  </ion-button>
+</div>
