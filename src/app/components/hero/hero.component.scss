@@ -1,0 +1,108 @@
+.hero-section {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  overflow: hidden;
+  
+  /* FONDO: Capa 1 (Degradado Azul) + Capa 2 (Imagen del Plano) */
+  background: 
+    linear-gradient(135deg, rgba(26, 42, 58, 0.94) 0%, rgba(13, 20, 29, 0.96) 100%),
+    url('../../../assets/images/fondo_hero.png');
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  /* MEZCLA: Hace que el plano se "tiña" de azul y no se vea como una foto pegada */
+  background-blend-mode: overlay; 
+  background-color: #1a2a3a; 
+
+  .hero-container {
+    z-index: 2;
+    position: relative;
+  }
+
+  .hero-content {
+    .hero-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+      color: #ffffff;
+      /* Sombra suave para que el texto "flote" sobre las líneas del plano */
+      text-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 25px;
+      line-height: 1.4;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-mini-text {
+      font-size: 0.9rem;
+      color: var(--ion-color-primary-light, #4dabff);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-weight: 700;
+      margin-bottom: 40px;
+    }
+
+    .hero-cta-container {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+
+      .hero-cta-button {
+        --border-radius: 10px;
+        --padding-top: 25px;
+        --padding-bottom: 25px;
+        font-weight: 700;
+        min-width: 220px;
+        margin: 0;
+        font-size: 1rem;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        
+        &.secondary-btn {
+          --color: #ffffff;
+          --border-color: rgba(255, 255, 255, 0.5);
+          &:hover {
+            --background: rgba(255, 255, 255, 0.1);
+          }
+        }
+      }
+    }
+  }
+}
+
+// Ajustes para Móvil
+@media (max-width: 768px) {
+  .hero-section {
+    min-height: 70vh;
+    padding: 60px 15px;
+
+    .hero-title {
+      margin-bottom: 15px;
+    }
+
+    .hero-cta-container {
+      flex-direction: column;
+      align-items: center;
+
+      .hero-cta-button {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+  }
+}

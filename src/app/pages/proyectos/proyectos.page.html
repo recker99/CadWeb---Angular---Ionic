@@ -1,0 +1,44 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Portafolio de Ingeniería</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-segment (ionChange)="filterProjects($event)" value="todos" [scrollable]="true">
+    <ion-segment-button value="todos">Todos</ion-segment-button>
+    <ion-segment-button value="arquitectura">Arq & 3D</ion-segment-button>
+    <ion-segment-button value="ingenieria">Ingeniería</ion-segment-button>
+    <ion-segment-button value="terreno">Terreno</ion-segment-button>
+    <ion-segment-button value="diseño">Diseño</ion-segment-button>
+  </ion-segment>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let p of proyectosFiltrados">
+        <ion-card class="proyecto-card">
+          
+          <div class="img-container">
+            <img [src]="p.miniaturaUrl" alt="Previsualización" />
+          </div>
+
+          <ion-card-header>
+            <ion-card-subtitle class="ion-text-uppercase">{{ p.categoria }}</ion-card-subtitle>
+            <ion-card-title>{{ p.titulo }}</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-button expand="block" [href]="p.archivoUrl" target="_blank" rel="noopener noreferrer" fill="solid">
+              {{ p.tipo === 'pdf' ? 'Ver Plano Técnico' : 'Ver en Alta Resolución' }}
+              <ion-icon slot="end" [name]="p.tipo === 'pdf' ? 'document-text-outline' : 'image-outline'"></ion-icon>
+            </ion-button>
+          </ion-card-content>
+
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

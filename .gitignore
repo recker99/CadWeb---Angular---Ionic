@@ -68,3 +68,8 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# --- SEGURIDAD DE INGENIERÍA ---
+# Ignorar credenciales de Firebase y variables de entorno
+src/environments/environment.ts
+src/environments/environment.prod.ts

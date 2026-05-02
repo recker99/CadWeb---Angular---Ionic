@@ -1,0 +1,43 @@
+<section class="contacto-section" id="contacto">
+  <div class="section-header ion-text-center">
+    <h2 class="section-title">Cotiza tu Proyecto</h2>
+    <div class="title-underline"></div>
+    <p class="section-subtitle">Envía tus detalles para una evaluación técnica inmediata.</p>
+  </div>
+
+  <ion-grid fixed>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-md="8" size-lg="6">
+        <form [formGroup]="contactForm" (submit)="enviarSolicitud($event)">
+  <ion-item lines="full" class="custom-input">
+    <ion-label position="stacked">Nombre Completo</ion-label>
+    <ion-input formControlName="from_name" name="from_name" placeholder="Ej: Iván Bustos"></ion-input>
+  </ion-item>
+
+  <ion-item lines="full" class="custom-input">
+    <ion-label position="stacked">Correo Electrónico</ion-label>
+    <ion-input formControlName="reply_to" name="reply_to" type="email" placeholder="nombre@ejemplo.com"></ion-input>
+  </ion-item>
+
+  <ion-item lines="full" class="custom-input">
+    <ion-label position="stacked">Tipo de Servicio</ion-label>
+    <ion-select formControlName="service_type" name="service_type" placeholder="Selecciona uno">
+      <ion-select-option value="Digitalización">Digitalización de Planos</ion-select-option>
+      <ion-select-option value="Modificación">Modificación / Actualización</ion-select-option>
+      <ion-select-option value="Diseño 3D">Modelado 3D / Render</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item lines="full" class="custom-input">
+    <ion-label position="stacked">Descripción</ion-label>
+    <ion-textarea formControlName="message" name="message" placeholder="Cuéntame más..."></ion-textarea>
+  </ion-item>
+
+  <ion-button expand="block" type="submit" class="submit-button" [disabled]="contactForm.invalid">
+    Enviar Solicitud
+  </ion-button>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</section>

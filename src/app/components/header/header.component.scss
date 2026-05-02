@@ -1,0 +1,77 @@
+ion-toolbar {
+  --padding-start: 16px;
+  --padding-end: 16px;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  font-family: 'Roboto', sans-serif; 
+  font-weight: 700;
+  color: var(--ion-color-dark);
+  font-size: 1.2rem;
+
+  ion-icon {
+    font-size: 1.8rem;
+    margin-right: 8px;
+    --color: var(--ion-color-primary); 
+  }
+}
+
+// Estilos para el menú en escritorio
+.desktop-menu {
+  ion-button {
+    --color: var(--ion-color-dark);
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    margin-left: 10px;
+
+    &::part(native) {
+      padding: 8px 16px;
+    }
+    // Efecto hover sutil
+    &:hover {
+      --color: var(--ion-color-primary);
+    }
+  }
+}
+
+// Estilos para el botón de menú móvil
+.mobile-menu {
+  ion-menu-button {
+    --color: var(--ion-color-dark);
+  }
+}
+
+// diseño Responsive
+// Oculta el menú de escritorio en pantallas medianas o más pequeñas
+
+// Optimizamos para pantallas muy pequeñas (iPhone SE, etc.)
+@media (max-width: 380px) {
+      .logo-container {
+        font-size: 1rem;
+
+        ion-icon {
+          font-size: 1.5rem;
+        }
+      }
+}
+
+@media (max-width: 991px) {
+  .desktop-menu {
+    display: none !important;
+  }
+  .mobile-menu {
+    display: block !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .desktop-menu {
+    display: block !important;
+  }
+  .mobile-menu {
+    display: none !important;
+  }
+}
