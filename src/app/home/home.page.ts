@@ -61,7 +61,12 @@ export class HomePage implements OnInit {
       'cube-outline': allIcons.cubeOutline,
       'logo-linkedin': allIcons.logoLinkedin,
       'logo-github': allIcons.logoGithub,
-      'compass-outline': allIcons.compassOutline // Agregado para usar el logo
+      'compass-outline': allIcons.compassOutline, // Agregado para usar el logo
+
+      // AGREGA ESTOS DOS AQUÍ:
+      'code-working-outline': allIcons.codeWorkingOutline, 
+      'ribbon-outline': allIcons.ribbonOutline,
+      'send-outline': allIcons.sendOutline 
     });
   }
 

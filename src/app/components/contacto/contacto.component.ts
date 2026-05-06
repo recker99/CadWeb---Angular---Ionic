@@ -1,28 +1,45 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicModule, ToastController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'; // Importar formularios
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import emailjs from '@emailjs/browser';
+
+// Importaciones para Standalone
+import { 
+  IonItem, IonLabel, IonInput, IonSelect, IonSelectOption, 
+  IonTextarea, IonButton, IonIcon, ToastController,
+  IonGrid, IonRow, IonCol 
+} from '@ionic/angular/standalone';
+
+import { addIcons } from 'ionicons';
+import { sendOutline, logoWhatsapp } from 'ionicons/icons';
 
 @Component({
   selector: 'app-contacto',
   templateUrl: './contacto.component.html',
   styleUrls: ['./contacto.component.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, ReactiveFormsModule] // Agregar ReactiveFormsModule 
+  // Listamos los componentes específicos para asegurar los estilos en el hosting
+  imports: [
+    CommonModule, 
+    ReactiveFormsModule,
+    IonItem, IonLabel, IonInput, IonSelect, IonSelectOption, 
+    IonTextarea, IonButton, IonIcon,
+    IonGrid, IonRow, IonCol 
+  ]
 })
 export class ContactoComponent implements OnInit {
 
-  contactForm!: FormGroup; // Variable para el grupo de controles
+  contactForm!: FormGroup;
 
-  // Inyectamos FormBuilder en el constructor
   constructor(
     private fb: FormBuilder, 
     private toastCtrl: ToastController
-  ) {}
+  ) {
+    // Registramos el iconos  para limpiar errores de la consola
+    addIcons({ 'send-outline': sendOutline, 'logo-whatsapp': logoWhatsapp });
+  }
 
   ngOnInit() {
-    // Inicializamos las reglas de validación
     this.contactForm = this.fb.group({
       from_name: ['', [Validators.required, Validators.minLength(3)]],
       reply_to: ['', [Validators.required, Validators.email]],
@@ -34,22 +51,19 @@ export class ContactoComponent implements OnInit {
   async enviarSolicitud(event: Event) {
     event.preventDefault();
 
-    // Validamos antes de intentar enviar a EmailJS
     if (this.contactForm.invalid) {
       this.mostrarToast('Por favor, completa correctamente todos los campos.', 'warning');
       return;
     }
     
-    //  configurar  emailjs.com
     const serviceID = 'service_2ukbi6q'; 
     const templateID = 'template_0cy82dp';
     const publicKey = 'ifvp214xeAVG6KpFC';
 
     try {
+      // Nota: Si usas sendForm, asegúrate de que los 'name' en el HTML coincidan con el template de EmailJS
       await emailjs.sendForm(serviceID, templateID, event.target as HTMLFormElement, publicKey);
       this.mostrarToast('¡Solicitud enviada! Te contactaré a la brevedad.', 'success');
-      
-      // Reseteamos el formulario reactivo
       this.contactForm.reset();
     } catch (error) {
       console.error('EmailJS Error:', error);

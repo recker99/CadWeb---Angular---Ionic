@@ -1,19 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
 import { DatabaseService } from '../../services/database'; 
 import { Title, Meta } from '@angular/platform-browser';
-// Importación de iconos y controlador
-import { addIcons } from 'ionicons';
-import { documentTextOutline, openOutline, searchOutline, imageOutline } from 'ionicons/icons';
 
-// Definimos la agrupación de tus subcarpetas de GitHub/Firebase
+// IMPORTACIONES DE PRECISIÓN (Ionic Standalone)
+import { 
+  IonContent, IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton,
+  IonSegment, IonSegmentButton, IonLabel, IonGrid, IonRow, IonCol,
+  IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonIcon, IonButton, IonCardSubtitle,
+} from '@ionic/angular/standalone';
+
+import { addIcons } from 'ionicons';
+import { 
+  documentTextOutline, openOutline, searchOutline, 
+  imageOutline, arrowBackOutline, gridOutline 
+} from 'ionicons/icons';
+
 const GRUPOS_CATEGORIAS: { [key: string]: string[] } = {
   'arquitectura': ['arquitectura', 'construcciones', 'modelamiento3d'],
   'ingenieria':   ['ingenieria', 'mecanica', 'electricidad', 'saneamiento'],
   'terreno':      ['terreno', 'topografia', 'camaras'],
-  'diseño':      ['diseño','grafica', 'catalogo'],
+  'diseño':       ['diseño','grafica', 'catalogo'],
   'otros':        ['otros']
 };
 
@@ -22,7 +30,13 @@ const GRUPOS_CATEGORIAS: { [key: string]: string[] } = {
   templateUrl: './proyectos.page.html',
   styleUrls: ['./proyectos.page.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule, FormsModule]
+  // IMPORTANTE: Listamos cada componente para que los estilos carguen en el hosting
+  imports: [
+    CommonModule, FormsModule,
+    IonContent, IonHeader, IonToolbar, IonTitle, IonButtons, IonBackButton,
+    IonSegment, IonSegmentButton, IonLabel, IonGrid, IonRow, IonCol,
+    IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonIcon, IonButton, IonCardSubtitle
+  ]
 })
 export class ProyectosPage implements OnInit {
 
@@ -30,48 +44,43 @@ export class ProyectosPage implements OnInit {
   todosLosProyectos: any[] = [];
 
   constructor(private db: DatabaseService, private titleService: Title, private metaService: Meta) {
-    // Registro de iconos para evitar errores de URL base
-    addIcons({ documentTextOutline, openOutline, searchOutline, imageOutline });
+    // Registramos todos los iconos, incluyendo los que pedía la consola (grid y arrow-back)
+    addIcons({ 
+      documentTextOutline, 
+      openOutline, 
+      searchOutline, 
+      imageOutline,
+      'arrow-back-outline': arrowBackOutline,
+      'grid-outline': gridOutline 
+    });
   }
 
-   ngOnInit() {
+  ngOnInit() {
     this.db.getProyectos().subscribe(res => {
       this.todosLosProyectos = res;
       this.proyectosFiltrados = this.todosLosProyectos;
-      console.log('Proyectos cargados:', res);
     });
 
-    // Título único para esta sección
-    this.titleService.setTitle('Servicios de AutoCAD y Proyectos de Ingeniería | Tu Nombre');
+    this.titleService.setTitle('Portafolio de Proyectos CAD e Ingeniería | Iván Bustos');
 
-    // Etiquetas Meta para Google
     this.metaService.updateTag({ 
       name: 'description', 
-      content: 'Dibujante Proyectista con 20 años de experiencia. Especialista en digitalización de planos, modelado 3D y layouts técnicos en Santiago, Chile.' 
-    });
-
-    // Keywords (Palabras clave)
-    this.metaService.updateTag({ 
-      name: 'keywords', 
-      content: 'AutoCAD, Planos, Ingeniería Industrial, Digitalización, 3D, Chile, Proyectista CAD' 
+      content: 'Explora mi portafolio de proyectos: Planos de arquitectura, estructuras industriales y levantamientos de terreno realizados en AutoCAD.' 
     });
   }
-
 
   filterProjects(event: any) {
-  const seleccion = event.detail.value;
+    const seleccion = event.detail.value;
 
-  if (seleccion === 'todos') {
-    this.proyectosFiltrados = this.todosLosProyectos;
-    return;
+    if (seleccion === 'todos') {
+      this.proyectosFiltrados = this.todosLosProyectos;
+      return;
+    }
+
+    this.proyectosFiltrados = this.todosLosProyectos.filter(p => {
+      const categoriaProyecto = p.categoria?.toLowerCase().trim();
+      const subcarpetasPermitidas = GRUPOS_CATEGORIAS[seleccion];
+      return subcarpetasPermitidas && subcarpetasPermitidas.includes(categoriaProyecto);
+    });
   }
-
-  this.proyectosFiltrados = this.todosLosProyectos.filter(p => {
-    // Usamos trim() para eliminar espacios accidentales al inicio o final
-    const categoriaProyecto = p.categoria?.toLowerCase().trim();
-    const subcarpetasPermitidas = GRUPOS_CATEGORIAS[seleccion];
-    
-    return subcarpetasPermitidas && subcarpetasPermitidas.includes(categoriaProyecto);
-  });
-}
 }
